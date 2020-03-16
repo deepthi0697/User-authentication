@@ -1,0 +1,56 @@
+JWT: json web token
+    * since http is a stateless protocol, everytime a user logs in then server eill send a particular jwt to identify the user, & evrytime user performs any operation he/she will send the token to the server.
+    * both encryption and decryption is possible.
+
+=> mongoose middleware functions-pre & post.
+    pre      |  pre           |   pre          pre
+        init,|       validate,|       save,       remove
+    post     |   post          |  post         post
+
+=> speciality of bcrypt is that it is 1 sided hashing.
+=> there is a package passport which provides 2 args- passwordEncryption & findByCredentials
+
+*** alernative for bcrypt is crypto, sha256, sha128, sha512.
+
+=> token contains 3 data i.e., header, payload/data, signature.
+
+*******************************************************************************************************************
+=> FOR FORGOT PASSWORD
+1. schema - user    
+    ->passwordResetToken
+    ->resetTokenSentTime
+
+2.api route handler
+    api.post('/users/forgotPassword)
+
+3.static method
+User.forgotPassword(email)
+IF EMAIL EXISTS THEN GEN TOKEN & SAVE TIME else catch(no user with mail exists)
+
+4. send email => dct.com/users/reset/dct123
+
+5.handling token reset
+app.get('/users/reset/:token')
+
+6. static
+    findByPasswordToken(token)
+
+***************************************************************************************************************
+
+customer1 
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTUyMGMzYWMzMDczODFlYzBjNGRiYWYiLCJjcmVhdGVkQXQiOjE1ODI0MzU5MjEzODYsImlhdCI6MTU4MjQzNTkyMX0.FibbRI4cxeCteHglZz91gKUQ70aubGR4bbyODd9T3kE
+
+customer2
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTUyMGNjMmZkOTE4ZDFhOGMzYjJhOTMiLCJjcmVhdGVkQXQiOjE1ODI0MzU5NTU4OTYsImlhdCI6MTU4MjQzNTk1NX0.8hp9lLI5j98C2Gb0vRrfHemnZtyo9UcPWfYlEl3_AMc
+
+
+adminNew
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTUyMGJmOGMzMDczODFlYzBjNGRiYWQiLCJjcmVhdGVkQXQiOjE1ODI0MzU5ODM2MjcsImlhdCI6MTU4MjQzNTk4M30.F0m7Zv6U_DnHAdculIljcu67B9jZMe_x4kWerRtfhmE
+
+
+user1997
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTUyMzRiZTNmNWM0MjIwMDQwNTBhNTEiLCJjcmVhdGVkQXQiOjE1ODI0NDU4MDI0MTQsImlhdCI6MTU4MjQ0NTgwMn0.rgU2d69Yi6FIJULtARv3LNFDIbBjENZEukNJBS2yzT8
+
+
+admin2
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZTUyMjQ4OWE3OTllOTFlN2NlZmVmNDgiLCJjcmVhdGVkQXQiOjE1ODI0NDE3MjA4NjAsImlhdCI6MTU4MjQ0MTcyMH0.shICboz9CxBcEpKzn_Nqs2qL4S1Q6wj1g7P9fTYOXfM

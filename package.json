@@ -17,6 +17,7 @@
     "loadash": "^1.0.0",
     "lodash": "^4.17.15",
     "mongoose": "^5.9.2",
+    "readme-md-generator": "^1.0.0",
     "validator": "^12.2.0"
   }
 }
